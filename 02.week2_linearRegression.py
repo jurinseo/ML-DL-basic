@@ -19,7 +19,7 @@ import numpy as np
 
 # +
 x_train = [1, 2, 3, 4, 5]
-y_train = [6, 7, 8, 9, 10]
+y_train = [2, 3, 4, 5, 6]
 
 # shape 1 (rank 1)
 W = tf.Variable(tf.random.normal([1]), name='weight')
@@ -41,8 +41,7 @@ model = tf.keras.models.Sequential() #모델
 model.add(tf.keras.layers.Dense(1, input_dim = 1)) # 레이어 추가 
 model.compile(loss='mean_squared_error', optimizer = sgd)
 
-model.fit(x_train, y_train, epochs=500, verbose=2) #verbose 0:로그x 1:로그o 2:간결로그o
+model.fit(x_train, y_train, epochs=1500, verbose=1) #verbose 0:로그x 1:로그o 2:간결로그o
 
 print(model.predict([1]))
-print(W)
-print(b)
+
