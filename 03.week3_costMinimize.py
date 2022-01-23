@@ -130,5 +130,28 @@ history = model.fit(X, Y, epochs=500, verbose=1) #verbose 0:로그x 1:로그o 2:
 plt.rcParams["figure.figsize"] = (8,6)
 plt.plot(history.history['loss'])
 
+# +
+# simple manul model by JS, Choi
+X_ = tf.constant(X,dtype=tf.float32)
+my_val = [-1.1600207]
+W = tf.Variable(my_val, name = 'weight')
+alpha = 0.001
+
+@tf.function
+def tftrain():
+    with tf.GradientTape(persistent=True) as tape:
+        hypothesis = tf.multiply(X_,W)
+        activate = hypothesis - Y
+        cost = tf.reduce_mean(tf.square(activate))
+        dw = tape.gradient(cost,W)
+        W.assign(W - alpha*(dw))
+
+        
+for n in range(500):
+    tftrain()
+   
+
+# -
+
 
 
