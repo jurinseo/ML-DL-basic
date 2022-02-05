@@ -44,7 +44,7 @@ optimizer = tf.keras.optimizers.SGD(learning_rate = 0.001)
 
 # -
 
-def grad(h, X, Y):
+def grad(X, Y):
     with tf.GradientTape() as tape:
         loss_value = loss_function(logistic_regression(X), X, Y)
         return tape.gradient(loss_value, [W, b])

@@ -62,19 +62,27 @@ def grad(h, X, Y):
 epochs = 2500
 i = []
 cost = []
+acc = []
 for epoch in range(epochs):
     i.append(epoch)
     for X, Y in iter(dataset):
         grads = grad(logistic_regression(X), X, Y)
         optimizer.apply_gradients(grads_and_vars = zip(grads, [W, b]))
         cost.append(loss_function(logistic_regression(X), X, Y))
+        acc.append(accuracy_function(logistic_regression(X), Y))
         if epoch % 100 == 0:
-            print("Iter: {}, Loss: {:.5f}, Accuracy: {:.2f}".format(epoch, loss_function(logistic_regression(X), X, Y), accuracy_function(logistic_regression(X), Y)))
+            print("Iter: {}, Loss: {:.5f}, Accuracy: {:.4f}".format(epoch, loss_function(logistic_regression(X), X, Y), accuracy_function(logistic_regression(X), Y)))
 
 plt.rcParams["figure.figsize"] = (8,6)
 plt.plot(i, cost, "b")
 plt.xlabel("epoch")
 plt.ylabel("cost")
+plt.show()
+
+plt.rcParams["figure.figsize"] = (8,6)
+plt.plot(i, acc, "r")
+plt.xlabel("epoch")
+plt.ylabel("accuracy")
 plt.show()
 
 
